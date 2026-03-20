@@ -40,7 +40,7 @@ public class LoginTests extends TestBase {
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(invalidPasswordErrorMessage, bot.getTextString(errorMessageContainer)),
-                () -> Assertions.assertFalse((bot.getURL().equals(baseURL))));
+                () -> Assertions.assertEquals(baseURL, bot.getURL()));
 
     }
 
