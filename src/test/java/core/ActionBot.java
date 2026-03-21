@@ -27,7 +27,7 @@ public class ActionBot {
 
     //Methods
 
-    public void validLogin(){
+    public void validLogin() {
         driver.findElement(By.cssSelector("#user-name"))
                 .sendKeys(standardUser);
         driver.findElement(By.cssSelector("#password"))
@@ -98,4 +98,21 @@ public class ActionBot {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
     }
+
+
+    public int addingProvidedAmountOfItemsToCart(List<WebElement> cssSelector, int amountOfItemsToBeAdded) {
+        if (amountOfItemsToBeAdded < 1 || amountOfItemsToBeAdded > cssSelector.size()) {
+            throw new IllegalArgumentException(
+                    "amountOfItemsToBeAdded value must be between 1 and " + cssSelector.size() + "."
+                    + "Provided test amount was : " + amountOfItemsToBeAdded);
+        }
+
+        int clicksCount = Math.min(amountOfItemsToBeAdded, cssSelector.size());
+
+        for (int i = 0; i < clicksCount; i++) {
+            cssSelector.get(i).click();
+        } return clicksCount;
+    }
+
+
 }
