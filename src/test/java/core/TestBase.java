@@ -31,7 +31,7 @@ public class TestBase {
 
         options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
-        bot = new ActionBot(driver, baseURL, wait);
+        bot = new ActionBot(driver, baseURL);
         driver.get(baseURL);
 
         driver.findElement(By.cssSelector("#user-name"))
