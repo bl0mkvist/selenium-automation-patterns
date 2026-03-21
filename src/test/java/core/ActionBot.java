@@ -17,10 +17,10 @@ public class ActionBot {
     protected String lastName = "Kowalski";
     protected String postalCode = "123456";
 
-    public ActionBot(WebDriver driver, String baseURL, WebDriverWait wait) {
+    public ActionBot(WebDriver driver, String baseURL) {
         this.driver = driver;
         this.baseURL = baseURL;
-        this.wait = wait;
+
 
     }
 
@@ -83,5 +83,10 @@ public class ActionBot {
                 .sendKeys(password);
         driver.findElement(By.cssSelector("#login-button"))
                 .click();
+    }
+
+    public void waitForElementToBeClickable(String cssSelector) {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
     }
 }
