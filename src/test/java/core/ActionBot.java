@@ -20,8 +20,6 @@ public class ActionBot {
     public ActionBot(WebDriver driver, String baseURL) {
         this.driver = driver;
         this.baseURL = baseURL;
-
-
     }
 
 
