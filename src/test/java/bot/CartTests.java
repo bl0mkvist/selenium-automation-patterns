@@ -19,6 +19,7 @@ public class CartTests extends TestBase {
     private final int amountOfRemoveButtons = 6;
     private final String listRemoveFromCartButtonsLandingPAgeSelector = "div>button[id*='remove']";
 
+    private final int amountOfRemoveButtons = 6;
 
     @Test
     @DisplayName("Verifying if 'Remove' button updates")
@@ -107,7 +108,7 @@ Dodanie wielu produktów → badge koszyka rośnie zgodnie z liczbą. - done
 3.
 Usunięcie produktu z listy produktów → badge maleje. -
 4.
-Usunięcie produktu z koszyka → badge maleje.
+Usunięcie produktu z koszyka → badge maleje. - done
 5.
 Przejście do koszyka i powrót do listy produktów → stan koszyka zachowany.
 6.
