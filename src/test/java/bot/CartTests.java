@@ -8,16 +8,18 @@ import org.junit.jupiter.api.Test;
 public class CartTests extends TestBase {
     private final String listOfAllAddToCartButtons = "div>button[id*='add-to-cart']";
     private final String listOfAllRemoveFromCartButtons = "button[data-test^='remove']";
+    private final String listOfItemsInCart = ".cart_item";
 
     private final String backpackAddSelector = "#add-to-cart-sauce-labs-backpack";
     private final String backpackRemoveSelector = "#remove-sauce-labs-backpack";
     private final String bikeAddSelector = "#add-to-cart-sauce-labs-bike-light";
     private final String bikeRemoveSelector = "#remove-sauce-labs-bike-light";
-    private final String cartBadgeProductsCount = "a.shopping_cart_link>span";
-    private final String removeTextString = "Remove";
 
-    private final int amountOfRemoveButtons = 6;
-    private final String listRemoveFromCartButtonsLandingPAgeSelector = "div>button[id*='remove']";
+    private final String cartButton = ".shopping_cart_container";
+    private final String cartBadgeProductsCount = "a.shopping_cart_link>span";
+
+
+    private final String removeTextString = "Remove";
 
     private final int amountOfRemoveButtons = 6;
 
@@ -85,15 +87,30 @@ public class CartTests extends TestBase {
         bot.click(backpackAddSelector);
         bot.click(bikeAddSelector);
 
-        if ( bot.getElements(listOfAllRemoveFromCartButtons).size() == 2) {
+        if (bot.getElements(listOfAllRemoveFromCartButtons).size() == 2) {
             bot.click(bikeRemoveSelector);
         }
 
         int expectedAmountOfItemsInCart = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
         int actualAmountOfItemsInCart = bot.getElements(listOfAllRemoveFromCartButtons).size();
-                Assertions.assertEquals(expectedAmountOfItemsInCart, actualAmountOfItemsInCart
+        Assertions.assertEquals(expectedAmountOfItemsInCart, actualAmountOfItemsInCart
                 , "Amount of items in cart does not match");
 
+
+    }
+
+    @Test
+    @DisplayName("Correct amount of products in cart on Cart View")
+    void shouldStoreCorrectAmountOfProductsInCartView() {
+        bot.validLogin();
+        int expectedItemsInCart = 4;
+        bot.addingProvidedAmountOfItemsToCart(bot.getElements(listOfAllAddToCartButtons), expectedItemsInCart);
+        bot.click(cartButton);
+        int actualItemsInCart = bot.getElements(listOfItemsInCart).size();
+
+        Assertions.assertEquals(expectedItemsInCart, actualItemsInCart
+                , "Count of items in cart does not match"
+        );
 
     }
 
@@ -106,7 +123,7 @@ Dodanie 1 produktu → badge koszyka = 1. - done
 2.
 Dodanie wielu produktów → badge koszyka rośnie zgodnie z liczbą. - done
 3.
-Usunięcie produktu z listy produktów → badge maleje. -
+Usunięcie produktu z listy produktów → badge maleje. - done
 4.
 Usunięcie produktu z koszyka → badge maleje. - done
 5.
