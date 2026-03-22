@@ -40,14 +40,36 @@ public class SortingTests extends TestBase {
         Assertions.assertEquals(expectedSortedHeadersList, actualHeadersList, "Products are not sorted by name A to Z");
 
     }
+
+    @Test
+    @DisplayName("Sorts products by name Z to A")
+    void shouldSortProductsAlphabeticallyDescending(){
+        bot.validLogin();
+        bot.click(sortingContainer);
+        bot.click(sortZtoAButton);
+
+        List<WebElement> headersList = bot.getElements(listProductsHeaders);
+        List<String> actualHeadersList = new ArrayList<>();
+
+        for (WebElement header : headersList) {
+            actualHeadersList.add(header.getText().trim());
+        }
+
+        List<String> expectedSortedHeaderList = new ArrayList<>(actualHeadersList);
+        Collections.sort(expectedSortedHeaderList, String.CASE_INSENSITIVE_ORDER.reversed());
+
+        Assertions.assertEquals(expectedSortedHeaderList, actualHeadersList, "Products are not sorted by name Z to A");
+    }
+
+
 }
 
 /*
 Sortowanie
 1.
-Sortowanie A→Z → sprawdź, że nazwy rosną alfabetycznie. (id.scribd.com)
+Sortowanie A→Z → sprawdź, że nazwy rosną alfabetycznie. (id.scribd.com) - done
 2.
-Sortowanie Z→A → sprawdź, że nazwy maleją alfabetycznie. (id.scribd.com)
+Sortowanie Z→A → sprawdź, że nazwy maleją alfabetycznie. (id.scribd.com) - done
 3.
 Sortowanie cena Low→High → ceny rosną. (id.scribd.com)
 4.
