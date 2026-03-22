@@ -17,9 +17,6 @@ public class CartTests extends TestBase {
     private final String removeTextString = "Remove";
 
     private final int amountOfRemoveButtons = 6;
-    private final String listRemoveFromCartButtonsLandingPAgeSelector = "div>button[id*='remove']";
-
-    private final int amountOfRemoveButtons = 6;
 
     @Test
     @DisplayName("Verifying if 'Remove' button updates")
