@@ -34,12 +34,21 @@ public class SortingTests extends TestBase {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortAtoZButton);
-
+        bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Name (A to Z)");
+        String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
+        Assertions.assertEquals(
+                "Name (A to Z)",
+                selectedOption,
+                 "Sorting method does not change");
+        bot.waitForPresenceOfElementLocated(listProductPrices);
 
         List<WebElement> headersList = bot.getElements(listProductsHeaders);
+        Assertions.assertFalse(
+                headersList.isEmpty(),
+                 "List is empty, possible issue with loading elements on Products Page");
         List<String> actualHeadersList = new ArrayList<>();
 
-        for (WebElement header : headersList){
+        for (WebElement header : headersList) {
             actualHeadersList.add(header.getText().trim());
         }
 
@@ -56,8 +65,16 @@ public class SortingTests extends TestBase {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortZtoAButton);
+        bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Name (Z to A)");
+        String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
+        Assertions.assertEquals(
+                "Name (Z to A)",
+                selectedOption,
+                "Sorting method does not change");
 
         List<WebElement> headersList = bot.getElements(listProductsHeaders);
+        Assertions.assertFalse(headersList.isEmpty()
+                , "List is empty, possible issue with loading elements on Products Page");
         List<String> actualHeadersList = new ArrayList<>();
 
         for (WebElement header : headersList) {
@@ -73,7 +90,7 @@ public class SortingTests extends TestBase {
 
     @Test
     @DisplayName("Sorts products by price Lowest to Highest")
-    void shouldSortProductsByPriceLowToHigh(){
+    void shouldSortProductsByPriceLowToHigh() {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortPriceLtoHButton);
@@ -101,6 +118,7 @@ public class SortingTests extends TestBase {
         Assertions.assertEquals(expectedProductPrices, actualBigDecimalProductPrices,
                 "Prices are not sorted by price ascending");
     }
+
 }
 
 /*
