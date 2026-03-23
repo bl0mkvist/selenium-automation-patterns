@@ -22,7 +22,9 @@ public class LoginTests extends TestBase {
     public void shouldLoginSuccessfullyWithValidCredentials() {
         bot.login(standardUser, validPassword);
 
-        Assertions.assertEquals(bot.getURL(), baseURL + "/inventory.html",
+        Assertions.assertEquals(
+                bot.getURL(),
+                baseURL + "/inventory.html",
                 "Incorrect URL, user with correct credentials was not logged in");
     }
 
@@ -31,7 +33,9 @@ public class LoginTests extends TestBase {
     public void shouldDenyAccessForLockedOutUser() {
         bot.login(lockedOutUser, validPassword);
 
-        Assertions.assertEquals(bot.getTextString(errorMessageContainer), lockedUserErrorMessage,
+        Assertions.assertEquals(
+                bot.getTextString(errorMessageContainer),
+                lockedUserErrorMessage,
                 "Error message not displayed. User might have forbidden access");
 
     }
