@@ -4,15 +4,9 @@ import core.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,12 +28,8 @@ public class SortingTests extends TestBase {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortAtoZButton);
+
         bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Name (A to Z)");
-        String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
-        Assertions.assertEquals(
-                "Name (A to Z)",
-                selectedOption,
-                 "Sorting method does not change");
         bot.waitForPresenceOfElementLocated(listProductPrices);
 
         List<WebElement> headersList = bot.getElements(listProductsHeaders);
@@ -53,8 +43,7 @@ public class SortingTests extends TestBase {
         }
 
         List<String> expectedSortedHeadersList = new ArrayList<>(actualHeadersList);
-        Collections.sort(expectedSortedHeadersList, String.CASE_INSENSITIVE_ORDER);
-
+        expectedSortedHeadersList.sort(String.CASE_INSENSITIVE_ORDER);
         Assertions.assertEquals(expectedSortedHeadersList, actualHeadersList, "Products are not sorted by name A to Z");
 
     }
@@ -65,12 +54,9 @@ public class SortingTests extends TestBase {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortZtoAButton);
+
         bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Name (Z to A)");
-        String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
-        Assertions.assertEquals(
-                "Name (Z to A)",
-                selectedOption,
-                "Sorting method does not change");
+        bot.waitForPresenceOfElementLocated(listProductPrices);
 
         List<WebElement> headersList = bot.getElements(listProductsHeaders);
         Assertions.assertFalse(headersList.isEmpty()
@@ -82,8 +68,7 @@ public class SortingTests extends TestBase {
         }
 
         List<String> expectedSortedHeaderList = new ArrayList<>(actualHeadersList);
-        Collections.sort(expectedSortedHeaderList, String.CASE_INSENSITIVE_ORDER.reversed());
-
+        expectedSortedHeaderList.sort(String.CASE_INSENSITIVE_ORDER.reversed());
         Assertions.assertEquals(expectedSortedHeaderList, actualHeadersList, "Products are not sorted by name Z to A");
     }
 
@@ -94,30 +79,60 @@ public class SortingTests extends TestBase {
         bot.validLogin();
         bot.click(sortingContainer);
         bot.click(sortPriceLtoHButton);
+
         bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Price (low to high)");
         bot.waitForPresenceOfElementLocated(listProductPrices);
-
-        String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
-        Assertions.assertEquals("Price (low to high)", selectedOption
-                , "Sorting method does not change");
 
         List<WebElement> productPrices = bot.getElements(listProductPrices);
         Assertions.assertFalse(productPrices.isEmpty()
                 , "List is empty, possible issue with loading elements on Products Page");
 
-        List<BigDecimal> actualBigDecimalProductPrices = new ArrayList<>();
+        List<BigDecimal> actualProductPrices = new ArrayList<>();
 
         for (WebElement price : productPrices) {
             String stringPrice = price.getText().replace("$", "").trim();
-            actualBigDecimalProductPrices.add(new BigDecimal((stringPrice)));
+            actualProductPrices.add(new BigDecimal((stringPrice)));
         }
 
-        List<BigDecimal> expectedProductPrices = new ArrayList<>(actualBigDecimalProductPrices);
+        List<BigDecimal> expectedProductPrices = new ArrayList<>(actualProductPrices);
         expectedProductPrices.sort(Comparator.naturalOrder());
 
-        Assertions.assertEquals(expectedProductPrices, actualBigDecimalProductPrices,
+        Assertions.assertEquals(expectedProductPrices, actualProductPrices,
                 "Prices are not sorted by price ascending");
     }
+
+    @Test
+    @DisplayName("Sorts products by price Highest to Lowest")
+    void shouldSortProductsByPriceHighToLow() {
+    bot.validLogin();
+    bot.click(sortingContainer);
+    bot.click(sortPriceHtoLButton);
+
+    bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue,"Price (high to low)");
+    bot.waitForPresenceOfElementLocated(listProductPrices);
+
+    List<WebElement> productPrices = bot.getElements(listProductPrices);
+    Assertions.assertFalse(productPrices.isEmpty()
+                , "List is empty, possible issue with loading elements on Products Page");
+
+    List<BigDecimal> actualProductPrices = new ArrayList<>();
+
+    for (WebElement price : productPrices) {
+        String stringPrice = price.getText().replace("$", "").trim();
+        actualProductPrices.add(new BigDecimal(stringPrice));
+    }
+
+    List<BigDecimal> expectedProductPrices = new ArrayList<>(actualProductPrices);
+    expectedProductPrices.sort(Comparator.reverseOrder());
+
+    Assertions.assertEquals(
+            expectedProductPrices,
+            actualProductPrices,
+            "Prices are not sorted by price descending");
+    }
+
+
+
 
 }
 
