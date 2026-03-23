@@ -44,8 +44,6 @@ public class ActionBot {
     public void waitForPresenceOfElementLocated(String cssSelector) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
-
-
     }
 
     public List<WebElement> getElements(String cssSelector) {
