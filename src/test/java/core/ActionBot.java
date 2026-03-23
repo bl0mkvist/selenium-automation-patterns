@@ -44,6 +44,8 @@ public class ActionBot {
     public void waitForPresenceOfElementLocated(String cssSelector) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
+
+
     }
 
     public List<WebElement> getElements(String cssSelector) {
@@ -115,4 +117,18 @@ public class ActionBot {
     }
 
 
+    public WebElement getElement(String cssSelector) {
+        return driver.findElement(By.cssSelector(cssSelector));
+    }
+
+
+    public void waitForDomAtribute(String cssSelector, String attribute, String value) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.domAttributeToBe(driver.findElement(By.cssSelector(cssSelector)), attribute, value));
+    }
+
+    public void waitTextToBePresentInElementLocated(String cssSelector,String textValue) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(cssSelector),textValue));
+    }
 }
