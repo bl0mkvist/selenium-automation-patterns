@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 
@@ -20,9 +18,10 @@ public class ActionBot {
     public ActionBot(WebDriver driver, String baseURL) {
         this.driver = driver;
         this.baseURL = baseURL;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-
+    //BOTMethods
     //ElementsMethods
     public WebElement getElement(String cssSelector) {
         return driver.findElement(By.cssSelector(cssSelector));
@@ -61,26 +60,21 @@ public class ActionBot {
 
     //ExplicitWaits
     public void waitForPresenceOfElementLocated(String cssSelector) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
     }
 
     public void waitForDomAtribute(String cssSelector, String attribute, String value) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.domAttributeToBe(driver.findElement(By.cssSelector(cssSelector)), attribute, value));
     }
 
     public void waitTextToBePresentInElementLocated(String cssSelector,String textValue) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(cssSelector),textValue));
     }
     public void waitForElementToBeClickable(String cssSelector) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
     }
 
     public void waitForElementToBeClickable(WebElement webElement) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable((webElement)));
     }
 
@@ -89,11 +83,6 @@ public class ActionBot {
         String stringValue = driver.findElement(By.cssSelector(cssSelector)).getText().replaceAll("[^0-9.]", "");
 
         return Double.parseDouble(stringValue);
-    }
-
-    public BigDecimal parseStringToBigDecimal(String cssSelector){
-        String stringValue = driver.findElement(By.cssSelector(cssSelector)).getText().replaceAll("[^0-9.]", "");
-        return new BigDecimal(stringValue);
     }
 
     //Logins
