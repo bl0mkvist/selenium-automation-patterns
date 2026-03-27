@@ -1,6 +1,6 @@
 package bot;
 
-import core.TestBase;
+import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,14 +32,14 @@ public class CartTests extends TestBase {
 
         Assertions.assertEquals(removeTextString,
                 bot.getTextString(backpackRemoveSelector),
-                "button state does not change");
+                "Button state does not change");
     }
 
     @Test
     @DisplayName("Verification if user can add all six products to the cart")
     void verify_if_user_can_add_all_six_products_to_cart() {
         bot.validLogin();
-        int numberOfClicks = bot.loopClicker(bot.getElements(listOfAllAddToCartButtons));
+        int numberOfClicks = bot.clickAllElementsReturnNumberOfClicks(bot.getElements(listOfAllAddToCartButtons));
 
         Assertions.assertEquals(numberOfClicks, amountOfRemoveButtons
                 , "difference between clicked buttons");
@@ -55,7 +55,7 @@ public class CartTests extends TestBase {
         int expectedCartCount = 1;
         int actualCartCount = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
 
-        Assertions.assertEquals(expectedCartCount, actualCartCount, "Badge value issue, value is not equal to 1");
+        Assertions.assertEquals(expectedCartCount, actualCartCount, "Badge value issue, value is not equal to " + expectedCartCount);
 
     }
 

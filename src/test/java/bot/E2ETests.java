@@ -1,6 +1,6 @@
 package bot;
 
-import core.TestBase;
+import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

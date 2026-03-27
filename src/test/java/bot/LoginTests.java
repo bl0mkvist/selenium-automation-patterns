@@ -1,6 +1,6 @@
 package bot;
 
-import core.TestBase;
+import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,12 +10,12 @@ public class LoginTests extends TestBase {
     static final String lockedOutUser = "locked_out_user";
     static final String validPassword = "secret_sauce";
 
-    private String errorMessageContainer = ".error-message-container";
-    private String lockedUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
-    private String invalidPasswordErrorMessage = "Epic sadface: Username and password do not match any user in this service";
-    private String emptyUsernameErrorMessage = "Epic sadface: Username is required";
-    private String logoutSidePanelSelector = "#react-burger-menu-btn";
-    private String logoutButtonSelector = "#logout_sidebar_link";
+    private final String errorMessageContainer = ".error-message-container";
+    private final String lockedUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
+    private final String invalidPasswordErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+    private final String emptyUsernameErrorMessage = "Epic sadface: Username is required";
+    private final String logoutSidePanelSelector = "#react-burger-menu-btn";
+    private final String logoutButtonSelector = "#logout_sidebar_link";
 
     @Test
     @DisplayName("User logs in properly with correct credentials.")
