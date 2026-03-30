@@ -20,8 +20,6 @@ public class CartTests extends TestBase {
 
     private final String removeTextString = "Remove";
 
-    private final int amountOfRemoveButtons = 6;
-
     @Test
     @DisplayName("Verifying if 'Remove' button updates")
     void adding_to_card_should_update_button_name() {
@@ -33,17 +31,21 @@ public class CartTests extends TestBase {
         Assertions.assertEquals(removeTextString,
                 bot.getTextString(backpackRemoveSelector),
                 "Button state does not change");
+
     }
 
     @Test
     @DisplayName("Verification if user can add all six products to the cart")
     void verify_if_user_can_add_all_six_products_to_cart() {
         bot.validLogin();
-        int numberOfClicks = bot.clickAllElementsReturnNumberOfClicks(bot.getElements(listOfAllAddToCartButtons));
+        int numberOfClicks = bot.clickAllElementsReturnNumberOfClicks(
+                bot.getElements(listOfAllAddToCartButtons)
+        );
+        final int amountOfRemoveButtons = 6;
 
-        Assertions.assertEquals(numberOfClicks, 
-                            amountOfRemoveButtons, 
-                            "difference between clicked buttons"
+        Assertions.assertEquals(numberOfClicks,
+                amountOfRemoveButtons,
+                "difference between clicked buttons"
         );
 
     }
@@ -57,10 +59,10 @@ public class CartTests extends TestBase {
         int expectedCartCount = 1;
         int actualCartCount = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
 
-        Assertions.assertEquals(expectedCartCount, 
-                                actualCartCount, 
-                                "Badge value issue, value is not equal to " + 
-                                expectedCartCount
+        Assertions.assertEquals(expectedCartCount,
+                actualCartCount,
+                "Badge value issue, value is not equal to " +
+                        expectedCartCount
         );
 
     }
@@ -81,8 +83,8 @@ public class CartTests extends TestBase {
 
         Assertions.assertEquals(expectedAmountOfItemsInCart
                 , actualAmountOfItemsInCart
-                , "Values of items added to cart and badge value count does not match");
-
+                , "Values of items added to cart and badge value count does not match"
+        );
 
     }
 
