@@ -41,8 +41,10 @@ public class CartTests extends TestBase {
         bot.validLogin();
         int numberOfClicks = bot.clickAllElementsReturnNumberOfClicks(bot.getElements(listOfAllAddToCartButtons));
 
-        Assertions.assertEquals(numberOfClicks, amountOfRemoveButtons
-                , "difference between clicked buttons");
+        Assertions.assertEquals(numberOfClicks, 
+                            amountOfRemoveButtons, 
+                            "difference between clicked buttons"
+        );
 
     }
 
@@ -55,7 +57,11 @@ public class CartTests extends TestBase {
         int expectedCartCount = 1;
         int actualCartCount = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
 
-        Assertions.assertEquals(expectedCartCount, actualCartCount, "Badge value issue, value is not equal to " + expectedCartCount);
+        Assertions.assertEquals(expectedCartCount, 
+                                actualCartCount, 
+                                "Badge value issue, value is not equal to " + 
+                                expectedCartCount
+        );
 
     }
 
@@ -66,13 +72,15 @@ public class CartTests extends TestBase {
         bot.validLogin();
 
         int expectedAmountOfItemsInCart = 4;
-        bot.addingProvidedAmountOfItemsToCart(bot.getElements(listOfAllAddToCartButtons)
-                , expectedAmountOfItemsInCart
+        bot.addingProvidedAmountOfItemsToCart(
+                bot.getElements(listOfAllAddToCartButtons),
+                expectedAmountOfItemsInCart
         );
 
         int actualAmountOfItemsInCart = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
 
-        Assertions.assertEquals(expectedAmountOfItemsInCart, actualAmountOfItemsInCart
+        Assertions.assertEquals(expectedAmountOfItemsInCart
+                , actualAmountOfItemsInCart
                 , "Values of items added to cart and badge value count does not match");
 
 
@@ -92,8 +100,10 @@ public class CartTests extends TestBase {
 
         int expectedAmountOfItemsInCart = Integer.parseInt(bot.getTextString(cartBadgeProductsCount));
         int actualAmountOfItemsInCart = bot.getElements(listOfAllRemoveFromCartButtons).size();
-        Assertions.assertEquals(expectedAmountOfItemsInCart, actualAmountOfItemsInCart
-                , "Amount of items in cart does not match");
+        Assertions.assertEquals(expectedAmountOfItemsInCart
+                , actualAmountOfItemsInCart
+                , "Amount of items in cart does not match"
+        );
 
 
     }
@@ -107,7 +117,8 @@ public class CartTests extends TestBase {
         bot.click(cartButton);
         int actualItemsInCart = bot.getElements(listOfItemsInCart).size();
 
-        Assertions.assertEquals(expectedItemsInCart, actualItemsInCart
+        Assertions.assertEquals(expectedItemsInCart
+                , actualItemsInCart
                 , "Count of items in cart does not match"
         );
 
