@@ -90,7 +90,7 @@ public class CartTests extends BaseTest {
 
         List<BigDecimal> listAllPrices = categoryPage.goToWspinaczkaCategory().readAllCategoryPrices();
 
-        BigDecimal expectedCartAmount = new BigDecimal("0");
+        BigDecimal expectedCartAmount = BigDecimal.ZERO;
 
         for (BigDecimal price : listAllPrices) {
             expectedCartAmount = expectedCartAmount.add(price);

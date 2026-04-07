@@ -7,13 +7,13 @@ import pom.core.BasePage;
 import java.math.BigDecimal;
 
 public class HomePage extends BasePage {
-    By productCategories = By.cssSelector(".storefront-product-section");
-    By windsurfingProductPageButton = By.cssSelector(".storefront-recent-products .post-4116");
-    By addWindsurfingButton = By.cssSelector(".storefront-recent-products [data-product_id='4116']"); // poprawic
-    By windsurfingActualPrice = By.cssSelector(".storefront-recent-products .post-4116 .amount");
-    By addWindsurfingLoadingIcon = By.cssSelector(".storefront-recent-products .loading[data-product_id='4116']");
-    By totalAmountTextField = By.cssSelector(".cart-contents .amount");
-    By cartButton = By.cssSelector(".site-header-cart");
+    private final By productCategories = By.cssSelector(".storefront-product-section");
+    private final By windsurfingProductPageButton = By.cssSelector(".storefront-recent-products .post-4116");
+    private final By addWindsurfingButton = By.cssSelector(".storefront-recent-products [data-product_id='4116']"); // poprawic
+    private final By windsurfingActualPrice = By.cssSelector(".storefront-recent-products .post-4116 .amount");
+    private final By addWindsurfingLoadingIcon = By.cssSelector(".storefront-recent-products .loading[data-product_id='4116']");
+    private final By totalAmountTextField = By.cssSelector(".cart-contents .amount");
+    private final By cartButton = By.cssSelector(".site-header-cart");
 
     public HomePage(WebDriver driver) {
         super(driver);

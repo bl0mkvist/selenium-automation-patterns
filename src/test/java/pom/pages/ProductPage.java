@@ -8,15 +8,15 @@ import pom.core.BasePage;
 import java.math.BigDecimal;
 
 public class ProductPage extends BasePage {
-    By addToCart = By.cssSelector(".cart>button");
-    By addToCartConfirmationWidget = By.cssSelector(".woocommerce-message[role='alert']");
-    By productPrice = By.cssSelector(".summary >.price>.amount");
-    By cartPriceTotal = By.cssSelector("#site-header-cart .cart-contents .amount");
-    By cartHeader = By.cssSelector("#site-header-cart");
-    By cartTotalPriceOnDropdown = By.cssSelector("#site-header-cart .total .amount");
-    By quantityInputField = By.cssSelector("input[name='quantity']");
-    By blockUIOverlay = By.cssSelector(".blockOverlay");
-    By productMaxQuantity = By.cssSelector(".summary .stock");
+    private final By addToCart = By.cssSelector(".cart>button");
+    private final By addToCartConfirmationWidget = By.cssSelector(".woocommerce-message[role='alert']");
+    private final By productPrice = By.cssSelector(".summary >.price>.amount");
+    private final By cartPriceTotal = By.cssSelector("#site-header-cart .cart-contents .amount");
+    private final By cartHeader = By.cssSelector("#site-header-cart");
+    private final By cartTotalPriceOnDropdown = By.cssSelector("#site-header-cart .total .amount");
+    private final By quantityInputField = By.cssSelector("input[name='quantity']");
+    private final By blockUIOverlay = By.cssSelector(".blockOverlay");
+    private final By productMaxQuantity = By.cssSelector(".summary .stock");
 
     public ProductPage(WebDriver driver) {
         super(driver);

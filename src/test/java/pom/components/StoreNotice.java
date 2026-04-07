@@ -9,9 +9,8 @@ import java.time.Duration;
 public class StoreNotice {
     protected final WebDriver driver;
     protected final WebDriverWait wait;
-    By storeNoticeDismissButton = By.cssSelector(".woocommerce-store-notice__dismiss-link");
-    By storeNoticePanel = By.cssSelector(".woocommerce-store-notice");
-
+    private final By storeNoticeDismissButton = By.cssSelector(".woocommerce-store-notice__dismiss-link");
+    private final By storeNoticePanel = By.cssSelector(".woocommerce-store-notice");
 
     public StoreNotice(WebDriver driver, int waitValueInSeconds) {
         this.driver = driver;
@@ -25,6 +24,5 @@ public class StoreNotice {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(storeNoticePanel));
         }
     }
-
 
 }

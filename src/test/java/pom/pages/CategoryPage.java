@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryPage extends BasePage {
-    String wspinaczkaSlug = "/wspinaczka/";
+    private final String wspinaczkaSlug = "/wspinaczka/";
 
-    By cartButton = By.cssSelector(".cart-contents");
-    By regularPrices = By.cssSelector(".price > .amount bdi");
-    By promoPrices = By.cssSelector(".price ins bdi");
-    By listOfAddToCartButtons = By.cssSelector("#main .add_to_cart_button");
+    private final By cartButton = By.cssSelector(".cart-contents");
+    private final By regularPrices = By.cssSelector(".price > .amount bdi");
+    private final By promoPrices = By.cssSelector(".price ins bdi");
+    private final By listOfAddToCartButtons = By.cssSelector("#main .add_to_cart_button");
 
     By blockUIOverlay = By.cssSelector(".loading");
     By categoryProducts = By.cssSelector("#main");
