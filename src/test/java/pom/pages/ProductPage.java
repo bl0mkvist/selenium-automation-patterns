@@ -24,6 +24,7 @@ public class ProductPage extends BasePage {
 
     public ProductPage go(String productSlug) {
         driver.get(baseURL + "/product/" + productSlug);
+        storeNotice.dismissStoreNotice();
         return this;
     }
 

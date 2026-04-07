@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pom.components.StoreNotice;
 import pom.helpers.ConfigurationReader;
 
 import java.math.BigDecimal;
@@ -17,12 +18,14 @@ public abstract class BasePage {
     protected final String baseURL;
     protected final int waitValueInSeconds;
     protected WebDriverWait wait;
+    protected StoreNotice storeNotice;
 
     protected BasePage(WebDriver driver) {
         this.driver = driver;
         this.baseURL = new ConfigurationReader().getBaseURL();
         this.waitValueInSeconds = new ConfigurationReader().getWait();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitValueInSeconds));
+        this.storeNotice = new StoreNotice(driver, waitValueInSeconds);
     }
 
     protected void clickElement(By cssSelector){
@@ -71,4 +74,6 @@ public abstract class BasePage {
         waitForElementVisibility(cssSelector);
         driver.findElement(cssSelector).sendKeys(value);
     }
+
+
 }

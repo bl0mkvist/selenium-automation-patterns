@@ -7,8 +7,6 @@ import pom.core.BasePage;
 import java.math.BigDecimal;
 
 public class HomePage extends BasePage {
-    By storeNoticeDismissButton = By.cssSelector(".woocommerce-store-notice__dismiss-link");
-    By storeNoticePanelDismissed = By.cssSelector(".woocommerce-store-notice [style='display:none;']");
     By productCategories = By.cssSelector(".storefront-product-section");
     By windsurfingProductPageButton = By.cssSelector(".storefront-recent-products .post-4116");
     By addWindsurfingButton = By.cssSelector(".storefront-recent-products [data-product_id='4116']"); // poprawic
@@ -23,9 +21,7 @@ public class HomePage extends BasePage {
 
     public HomePage goToHomePage() {
         driver.get(baseURL);
-        waitForElementTobeClickable(storeNoticeDismissButton);
-        clickElement(storeNoticeDismissButton);
-        waitForElementToDisappear(storeNoticePanelDismissed);
+        storeNotice.dismissStoreNotice();
         return this;
     }
 
