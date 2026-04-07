@@ -27,6 +27,7 @@ public class CategoryPage extends BasePage {
 
     public CategoryPage goToWspinaczkaCategory() {
         driver.get(baseURL + "/product-category" + wspinaczkaSlug);
+        storeNotice.dismissStoreNotice();
         return this;
     }
 
