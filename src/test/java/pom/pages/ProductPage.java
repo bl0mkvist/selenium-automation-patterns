@@ -1,8 +1,10 @@
 package pom.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.WebElement;
 import pom.core.BasePage;
 
 import java.math.BigDecimal;
@@ -29,9 +31,13 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage addProductToCart() {
-        waitForElementTobeClickable(addToCart);
         clickElement(addToCart);
         waitForElementVisibility(addToCartConfirmationWidget);
+        return this;
+    }
+
+    public ProductPage clickAddToCart() {
+        clickElement(addToCart);
         return this;
     }
 
@@ -51,7 +57,7 @@ public class ProductPage extends BasePage {
         return convertStringToBigDecimal(cartTotalPriceOnDropdown);
     }
 
-    public ProductPage setQuantity(int productsNumber) {
+    public ProductPage setQuantity(int productsAmount) {
         waitForElementVisibility(quantityInputField);
         clearInputField(quantityInputField);
 
@@ -59,14 +65,30 @@ public class ProductPage extends BasePage {
                 .getText()
                 .replaceAll("[^\\d,.-]", ""));
 
-        if (productsNumber < 0 || productsNumber > quantityMax) {
+        if (productsAmount < 0 || productsAmount > quantityMax) {
             throw new IllegalArgumentException(
                     "Incorrect number provided. Number of products must be between 1 and " + quantityMax
-                            + ". Number provided : " + productsNumber);
+                            + ". Number provided : " + productsAmount);
         }
 
-        sendKeys(quantityInputField, String.valueOf(productsNumber));
+        sendKeys(quantityInputField, String.valueOf(productsAmount));
         waitForElementToDisappear(blockUIOverlay);
         return this;
+    }
+
+    public ProductPage setRawQuantity(int productsAmount) {
+        waitForElementVisibility(quantityInputField);
+        clearInputField(quantityInputField);
+        sendKeys(quantityInputField, String.valueOf(productsAmount));
+        waitForElementToDisappear(blockUIOverlay);
+        return this;
+    }
+
+    public boolean isQuantityValid() {
+        WebElement quantityField = driver.findElement(quantityInputField);
+
+        boolean isValid = (Boolean) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].checkValidity();", quantityField);
+        return isValid;
     }
 }
