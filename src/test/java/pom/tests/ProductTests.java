@@ -2,7 +2,6 @@ package pom.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import pom.core.BaseTest;
 import pom.pages.HomePage;
 import pom.pages.ProductPage;
@@ -13,11 +12,8 @@ import java.math.BigDecimal;
 public class ProductTests extends BaseTest {
     String windsurfingSlug = "/windsurfing-w-lanzarote-costa-teguise/";
 
-    private final By quantityInputField = By.cssSelector("input[name='quantity']");
-    private final String quantityInput =  "input[name='quantity']";
-
     @Test
-    void shouldUpdateCartPricesAfterAddingProduct_updated() {
+    void shouldUpdateCartPricesAfterAddingProduct() {
         HomePage homePage = new HomePage(driver);
 
         ProductPage productPage =
@@ -62,13 +58,17 @@ public class ProductTests extends BaseTest {
 
     @Test
     void shouldNotAllowNegativeProductQuantityValue() {
+        int quantityNegativeValue = -1;
+
         ProductPage productPage = new ProductPage(driver)
                 .go(windsurfingSlug)
-                .setRawQuantity(-1)
+                .setRawQuantity(quantityNegativeValue)
                 .clickAddToCart();
 
-                Assertions.assertFalse(productPage.isQuantityValid(),
-                        "Error validation was not triggered on Quantity field");
+        Assertions.assertFalse(productPage.isQuantityValid(),
+                "Expected quantity field to be invalid for value "
+                        + quantityNegativeValue
+                        + ", but it was reported as valid.");
     }
 
 }

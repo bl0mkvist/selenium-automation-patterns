@@ -6,6 +6,7 @@ import pom.core.BaseTest;
 import pom.pages.CartPage;
 import pom.pages.CategoryPage;
 import pom.pages.HomePage;
+import pom.pages.ProductPage;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -58,8 +59,8 @@ public class CartTests extends BaseTest {
     }
 
     @Test
-    void shouldRecalculateCartValueAfterApplyingDiscountCoupon() {
-        final HomePage homePage = new HomePage(driver);
+    void shouldRecalculateCartValueAfterApplyingCoupon() {
+        HomePage homePage = new HomePage(driver);
         homePage.goToHomePage().addWindsurfingProductToCart();
 
         final int quantity = 10;
@@ -83,6 +84,29 @@ public class CartTests extends BaseTest {
                         + " does not match actual cart total value : " + actualCartValueWithDiscount);
     }
 
+    @Test
+    void shouldNotApplyInvalidCoupon() {
+        CartPage cartPage = new HomePage(driver)
+                .goToHomePage()
+                .addWindsurfingProductToCart()
+                .goToCart();
+
+        final BigDecimal cartValue = cartPage.readTotalCartAmount();
+        final String invalidCoupon = "invalid";
+
+        cartPage.applyCoupon(invalidCoupon);
+        String couponErrorMessage = cartPage.readCouponErrorMessage();
+
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(cartValue.compareTo(cartPage.readTotalCartAmount()) == 0
+                , "Cart value should not change after applying invalid coupon"),
+                () -> Assertions.assertTrue(couponErrorMessage.contains(invalidCoupon)
+                , "Coupon text not present in error message"),
+                () -> Assertions.assertTrue(couponErrorMessage.contains("nie istnieje")
+                , "Coupon text message is not correct")
+        );
+    }
+
 
     @Test
     void shouldCalculateTotalCartValueForAllProductsInCategory() {
@@ -104,6 +128,24 @@ public class CartTests extends BaseTest {
                 , "Expected total cart value : " + expectedCartAmount
                         + " does not match with cart total value : " + actualCartAmount
         );
-
     }
+
+    @Test
+    void shouldRemoveProductFromCart() {
+        CartPage cartPage = new HomePage(driver)
+                .goToHomePage()
+                .addWindsurfingProductToCart()
+                .goToCart()
+                .removeProductFromCart();
+
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(cartPage.isCartEmpty()
+                        , "Product is still displayed on Cart Page"),
+                () -> Assertions.assertTrue(cartPage.isEmptyCartNotificationDisplayed()
+                        , "Empty cart notification is not displayed")
+        );
+    }
+
+
+
 }
