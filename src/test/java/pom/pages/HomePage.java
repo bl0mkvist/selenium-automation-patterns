@@ -1,7 +1,9 @@
 package pom.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pom.core.BasePage;
 
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ public class HomePage extends BasePage {
     private final By addWindsurfingLoadingIcon = By.cssSelector(".storefront-recent-products .loading[data-product_id='4116']");
     private final By totalAmountTextField = By.cssSelector(".cart-contents .amount");
     private final By cartButton = By.cssSelector(".site-header-cart");
+    private final By searchTextField = By.cssSelector("input.search-field");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -64,5 +67,15 @@ public class HomePage extends BasePage {
     public CartPage goToCart() {
         clickElement(cartButton);
         return new CartPage(driver);
+    }
+
+    public SearchResultsPage searchForProduct(String searchKeyWord) {
+        waitForElementVisibility(searchTextField);
+        sendKeys(searchTextField, searchKeyWord);
+        driver.findElement(searchTextField).sendKeys(Keys.ENTER);
+
+        wait.until(ExpectedConditions.urlContains(searchKeyWord));
+
+        return new SearchResultsPage(driver);
     }
 }
