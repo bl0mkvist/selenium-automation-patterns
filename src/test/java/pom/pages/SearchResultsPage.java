@@ -18,9 +18,8 @@ public class SearchResultsPage extends BasePage {
         super(driver);
     }
 
-
     public boolean checkSearchKeyWord(String searchKeyWord) {
-        waitForElementVisibility(productsContainer);
+        waitForVisibility(productsContainer);
 
         List<WebElement> productsTitles = driver.findElements(listOfAllProductTitles);
 
@@ -31,5 +30,4 @@ public class SearchResultsPage extends BasePage {
                 .map(s->s.replace("ę", "e"))
                 .allMatch(s->s.contains(searchKeyWord));
     }
-
 }

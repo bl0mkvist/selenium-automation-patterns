@@ -25,8 +25,7 @@ public class CartPage extends BasePage  {
     }
 
     public boolean isEmptyCartNotificationDisplayed() {
-        waitForElementVisibility(emptyCartNotification);
-        return driver.findElement(emptyCartNotification).isDisplayed();
+        return waitForVisibility(emptyCartNotification).isDisplayed();
     }
 
     public boolean isCartEmpty() {
@@ -34,13 +33,11 @@ public class CartPage extends BasePage  {
     }
 
     public BigDecimal readTotalCartAmount() {
-        waitForElementVisibility(totalCartValue);
+        waitForVisibility(totalCartValue);
         return convertStringToBigDecimal(totalCartValue);
     }
 
-
     public CartPage setQuantity(int quantity) {
-        waitForElementVisibility(quantityInputField);
         clearInputField(quantityInputField);
         sendKeys(quantityInputField, String.valueOf(quantity));
         return this;
@@ -48,26 +45,24 @@ public class CartPage extends BasePage  {
 
     public CartPage updateCart() {
         clickElement(updateCartButton);
-        waitForElementToDisappear(blockUWrapper);
+        waitForToDisappear(blockUWrapper);
         return this;
     }
 
     public CartPage applyCoupon(String couponCode) {
-        waitForElementVisibility(couponInputField);
         sendKeys(couponInputField, couponCode);
         clickElement(couponApplyButton);
-        waitForElementToDisappear(blockUWrapper);
+        waitForToDisappear(blockUWrapper);
         return this;
     }
 
     public CartPage removeProductFromCart() {
         clickElement(removeProductButton);
-        waitForElementToDisappear(blockUWrapper);
+        waitForToDisappear(blockUWrapper);
         return this;
     }
 
     public String readCouponErrorMessage() {
-        waitForElementVisibility(couponErrorText);
-        return driver.findElement(couponErrorText).getText();
+        return waitForVisibility(couponErrorText).getText();
     }
 }

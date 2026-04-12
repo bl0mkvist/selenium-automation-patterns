@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.components.StoreNotice;
 import pom.helpers.ConfigurationReader;
+import pom.helpers.WaitUtils;
 import pom.helpers.WindowHelper;
 
 import java.math.BigDecimal;
@@ -17,10 +18,11 @@ import java.time.Duration;
 public abstract class BasePage {
     protected final WebDriver driver;
     protected final String baseURL;
-    protected final int waitValueInSeconds;
-    protected WebDriverWait wait;
+    protected int waitValueInSeconds;
     protected StoreNotice storeNotice;
     protected WindowHelper windowHelper;
+    protected WaitUtils waitUtils;
+    protected final WebDriverWait wait;
 
     protected BasePage(WebDriver driver) {
         this.driver = driver;
@@ -29,58 +31,57 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitValueInSeconds));
         this.storeNotice = new StoreNotice(driver, waitValueInSeconds);
         this.windowHelper = new WindowHelper(driver, waitValueInSeconds);
+        this.waitUtils = new WaitUtils(driver, waitValueInSeconds);
+    }
+
+    protected void goToProductPage(String productSlug) {
+        driver.get(baseURL + "/products" + productSlug);
+        storeNotice.dismissStoreNotice();
     }
 
     protected void clickElement(By cssSelector){
-        wait.until(ExpectedConditions.elementToBeClickable(cssSelector));
-        driver.findElement(cssSelector).click();
-    }
-
-    protected void waitForElementTobeClickable(By cssSelector) {
-        wait.until(ExpectedConditions.elementToBeClickable(cssSelector));
-    }
-
-    protected void waitForElementTobeClickable(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    protected void waitForElementToDisappear(By cssSelector) {
-        wait.until(ExpectedConditions.numberOfElementsToBe(cssSelector, 0));
-    }
-
-    protected void waitForElementVisibility(By cssSelector) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cssSelector));
-    }
-
-    protected void waitForNumberOfWindowsToBe(int numberOfWindows){
-        wait.until(ExpectedConditions.numberOfWindowsToBe(numberOfWindows));
+        WebElement element = waitUtils.waitTobeClickable(cssSelector);
+        element.click();
     }
 
     protected void hoverOverElement(By cssSelector) {
-        waitForElementVisibility(cssSelector);
-        WebElement elementToHover = driver.findElement(cssSelector);
+        WebElement elementToHover = waitUtils.waitForVisibility(cssSelector);
         new Actions(driver).moveToElement(elementToHover).perform();
     }
 
     protected String readText(By cssSelector) {
-        waitForElementVisibility(cssSelector);
-        return driver.findElement(cssSelector).getText();
+       return waitUtils.waitForVisibility(cssSelector).getText();
     }
 
     protected BigDecimal convertStringToBigDecimal(By cssSelector) {
+        waitUtils.waitForVisibility(cssSelector);
         String readedString = readText(cssSelector).replaceAll("[^\\d,.-]", "");
         return new BigDecimal(readedString.replace(",", "."));
     }
 
     protected void clearInputField(By cssSelector) {
-        waitForElementVisibility(cssSelector);
-        driver.findElement(cssSelector).clear();
+        WebElement element = waitUtils.waitForVisibility(cssSelector);
+        element.clear();
     }
 
     protected void sendKeys(By cssSelector, String value) {
-        waitForElementVisibility(cssSelector);
-        driver.findElement(cssSelector).sendKeys(value);
+        WebElement element = waitUtils.waitForVisibility(cssSelector);
+        element.sendKeys(value);
     }
 
+    public int getListSize(By locator) {
+        waitForVisibility(locator);
+        return driver.findElements(locator).size();
+    }
 
+    //domen waits
+    public void waitForToDisappear(By cssSelector) {
+        wait.until(ExpectedConditions.numberOfElementsToBe(cssSelector, 0));
+    }
+    public WebElement waitForVisibility(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public WebElement waitToBeClickable(WebElement locator) {
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
 }

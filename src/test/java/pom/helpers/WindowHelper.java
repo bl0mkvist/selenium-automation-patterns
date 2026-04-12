@@ -9,16 +9,15 @@ import java.util.Set;
 
 public class WindowHelper {
     private final WebDriver driver;
-    private final WebDriverWait wait;
+    protected WaitUtils waitUtils;
 
     public WindowHelper(WebDriver driver, int waitInSeconds) {
        this.driver = driver;
-       this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitInSeconds));
+       this.waitUtils = new WaitUtils(driver, waitInSeconds);
     }
 
-
     public void switchToNewWindow(String originalWindowHandle) {
-        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        waitUtils.waitForWindowsToBe(2);
 
         Set<String> allWindowsHandles = driver.getWindowHandles();
 

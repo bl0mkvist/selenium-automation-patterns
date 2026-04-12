@@ -34,7 +34,7 @@ public class CategoryPage extends BasePage {
     public List<BigDecimal> readAllCategoryPrices() {
         List<BigDecimal> pricesList = new ArrayList<>();
 
-        waitForElementVisibility(categoryProducts);
+        waitForVisibility(categoryProducts);
 
         List<WebElement> regularPrice = driver.findElements(regularPrices);
         for (WebElement price : regularPrice) {
@@ -51,13 +51,13 @@ public class CategoryPage extends BasePage {
     }
 
     public CategoryPage addAllCategoryProductsToCart() {
-        waitForElementVisibility(listOfAddToCartButtons);
+        waitForVisibility(listOfAddToCartButtons);
         List<WebElement> buttons = driver.findElements(listOfAddToCartButtons);
 
         for (WebElement element : buttons) {
-            waitForElementTobeClickable(element);
+            waitToBeClickable(element);
             element.click();
-            waitForElementToDisappear(blockUIOverlay);
+            waitForToDisappear(blockUIOverlay);
         }
         return this;
     }

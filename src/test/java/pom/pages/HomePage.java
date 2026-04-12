@@ -29,19 +29,16 @@ public class HomePage extends BasePage {
     }
 
     public HomePage addWindsurfingProductToCart() {
-        waitForElementTobeClickable(addWindsurfingButton);
         clickElement(addWindsurfingButton);
-        waitForElementToDisappear(addWindsurfingLoadingIcon);
+        waitForToDisappear(addWindsurfingLoadingIcon);
         return this;
     }
 
     public BigDecimal readWindsurfingProductPrice() {
-        waitForElementVisibility(windsurfingActualPrice);
         return convertStringToBigDecimal(windsurfingActualPrice);
     }
 
     public BigDecimal readTotalCartAmount() {
-        waitForElementVisibility(totalAmountTextField);
         return convertStringToBigDecimal(totalAmountTextField);
     }
 
@@ -54,12 +51,11 @@ public class HomePage extends BasePage {
     }
 
     public boolean hasProductsCategories() {
-        waitForElementVisibility(productCategories);
+        waitForVisibility(productCategories);
         return !driver.findElements(productCategories).isEmpty();
     }
 
     public ProductPage goToWindsurfingPage() {
-        waitForElementTobeClickable(windsurfingProductPageButton);
         clickElement(windsurfingProductPageButton);
         return new ProductPage(driver);
     }
@@ -70,11 +66,9 @@ public class HomePage extends BasePage {
     }
 
     public SearchResultsPage searchForProduct(String searchKeyWord) {
-        waitForElementVisibility(searchTextField);
         sendKeys(searchTextField, searchKeyWord);
         driver.findElement(searchTextField).sendKeys(Keys.ENTER);
-
-        wait.until(ExpectedConditions.urlContains(searchKeyWord));
+        waitUtils.waitForURLContains(searchKeyWord);
 
         return new SearchResultsPage(driver);
     }

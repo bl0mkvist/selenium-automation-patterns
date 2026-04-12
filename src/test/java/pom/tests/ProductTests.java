@@ -40,7 +40,7 @@ public class ProductTests extends BaseTest {
     @Test
     void shouldRecalculateTotalPriceWhenChangingQuantity() {
         ProductPage productPage = new ProductPage(driver)
-                .go(windsurfingSlug);
+                .openToProductPage(windsurfingSlug);
 
         BigDecimal actualProductPrice = productPage.readProductPrice();
 
@@ -61,7 +61,7 @@ public class ProductTests extends BaseTest {
         int quantityNegativeValue = -1;
 
         ProductPage productPage = new ProductPage(driver)
-                .go(windsurfingSlug)
+                .openToProductPage(windsurfingSlug)
                 .setRawQuantity(quantityNegativeValue)
                 .clickAddToCart();
 

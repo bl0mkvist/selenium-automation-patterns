@@ -16,7 +16,7 @@ public class WishlistTests extends BaseTest {
     @Test
     void shouldDisplayProductInWishlist() {
         WishlistPage wishlistPage = new ProductPage(driver)
-                .go(granKoscielcowProduct)
+                .openToProductPage(granKoscielcowProduct)
                 .addProductToWishList()
                 .goToWishlistPage();
 

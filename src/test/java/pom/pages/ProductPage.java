@@ -26,15 +26,14 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
-    public ProductPage go(String productSlug) {
-        driver.get(baseURL + "/product/" + productSlug);
-        storeNotice.dismissStoreNotice();
+    public ProductPage openToProductPage(String productSlug) {
+        this.goToProductPage(productSlug);
         return this;
     }
 
     public ProductPage addProductToCart() {
         clickElement(addToCart);
-        waitForElementVisibility(addToCartConfirmationWidget);
+        waitUtils.waitForVisibility(addToCartConfirmationWidget);
         return this;
     }
 
@@ -44,23 +43,19 @@ public class ProductPage extends BasePage {
     }
 
     public BigDecimal readProductPrice() {
-        waitForElementVisibility(productPrice);
         return convertStringToBigDecimal(productPrice);
     }
 
     public BigDecimal readTotalCartAmount() {
-        waitForElementVisibility(cartPriceTotal);
         return convertStringToBigDecimal(cartPriceTotal);
     }
 
     public BigDecimal readTotalCartAmountOnDropdown() {
-        waitForElementVisibility(cartHeader);
         hoverOverElement(cartHeader);
         return convertStringToBigDecimal(cartTotalPriceOnDropdown);
     }
 
     public ProductPage setQuantity(int productsAmount) {
-        waitForElementVisibility(quantityInputField);
         clearInputField(quantityInputField);
 
         int quantityMax = Integer.parseInt(driver.findElement(productMaxQuantity)
@@ -74,15 +69,14 @@ public class ProductPage extends BasePage {
         }
 
         sendKeys(quantityInputField, String.valueOf(productsAmount));
-        waitForElementToDisappear(blockUIOverlay);
+        waitForToDisappear(blockUIOverlay);
         return this;
     }
 
     public ProductPage setRawQuantity(int productsAmount) {
-        waitForElementVisibility(quantityInputField);
         clearInputField(quantityInputField);
         sendKeys(quantityInputField, String.valueOf(productsAmount));
-        waitForElementToDisappear(blockUIOverlay);
+        waitForToDisappear(blockUIOverlay);
         return this;
     }
 
@@ -96,7 +90,7 @@ public class ProductPage extends BasePage {
 
     public ProductPage addProductToWishList() {
         clickElement(addToWishlistButton);
-        waitForElementToDisappear(blockUIOverlay);
+        waitForToDisappear(blockUIOverlay);
         return this;
     }
 
