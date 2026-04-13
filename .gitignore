@@ -8,6 +8,8 @@ replay_pid*
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+allure-results/
+allure-report/
 
 # Archives / packages
 *.jar
