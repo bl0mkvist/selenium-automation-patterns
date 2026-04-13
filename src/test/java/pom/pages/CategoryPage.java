@@ -31,13 +31,13 @@ public class CategoryPage extends BasePage {
 
     public CategoryPage goToWspinaczkaCategory() {
         driver.get(baseURL + "/product-category" + wspinaczkaSlug);
-        storeNotice.dismissStoreNotice();
+        storeNotice.dismissStoreNoticeIfPresent();
         return this;
     }
 
     public CategoryPage goToWindsurfingCategory() {
         driver.get(baseURL + "/product-category" + windsurfingSlug);
-        storeNotice.dismissStoreNotice();
+        storeNotice.dismissStoreNoticeIfPresent();
         return this;
     }
 

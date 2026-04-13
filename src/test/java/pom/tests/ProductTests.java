@@ -1,6 +1,7 @@
 package pom.tests;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pom.core.BaseTest;
 import pom.pages.HomePage;
@@ -13,6 +14,7 @@ public class ProductTests extends BaseTest {
     String windsurfingSlug = "/windsurfing-w-lanzarote-costa-teguise/";
 
     @Test
+    @DisplayName("Should update cart prices after adding product")
     void shouldUpdateCartPricesAfterAddingProduct() {
         HomePage homePage = new HomePage(driver);
 
@@ -38,6 +40,7 @@ public class ProductTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should recalculate total price when changing quantity")
     void shouldRecalculateTotalPriceWhenChangingQuantity() {
         ProductPage productPage = new ProductPage(driver)
                 .openProductPage(windsurfingSlug);
@@ -57,6 +60,7 @@ public class ProductTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should not allow negative product quantity value")
     void shouldNotAllowNegativeProductQuantityValue() {
         int quantityNegativeValue = -1;
 

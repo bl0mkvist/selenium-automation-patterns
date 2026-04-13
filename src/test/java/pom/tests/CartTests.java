@@ -1,6 +1,7 @@
 package pom.tests;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pom.core.BaseTest;
 import pom.pages.CartPage;
@@ -14,6 +15,7 @@ public class CartTests extends BaseTest {
 
 
     @Test
+    @DisplayName( "Should display product in cart with correct total cart price")
     void shouldDisplayProductInCartWithCorrectTotalCartPrice() {
         final HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
@@ -32,6 +34,7 @@ public class CartTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should recalculate cart value after changing quantity")
     void shouldRecalculateCartValueAfterChangingQuantity() {
         final HomePage homePage = new HomePage(driver);
         final BigDecimal actualProductPrice = homePage.goToHomePage()
@@ -58,6 +61,7 @@ public class CartTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should recalculate cart value after applying coupon")
     void shouldRecalculateCartValueAfterApplyingCoupon() {
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage().addWindsurfingProductToCart();
@@ -84,6 +88,7 @@ public class CartTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should not apply invalid coupon")
     void shouldNotApplyInvalidCoupon() {
         CartPage cartPage = new HomePage(driver)
                 .goToHomePage()
@@ -108,6 +113,7 @@ public class CartTests extends BaseTest {
 
 
     @Test
+    @DisplayName("Should calculate total cart value for all products in category")
     void shouldCalculateTotalCartValueForAllProductsInCategory() {
         CategoryPage categoryPage = new CategoryPage(driver);
 
@@ -130,6 +136,7 @@ public class CartTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should remove product from cart")
     void shouldRemoveProductFromCart() {
         CartPage cartPage = new HomePage(driver)
                 .goToHomePage()

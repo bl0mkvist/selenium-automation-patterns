@@ -1,6 +1,7 @@
 package pom.tests;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pom.core.BaseTest;
 import pom.pages.HomePage;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 public class HomeTests extends BaseTest {
 
     @Test
+    @DisplayName("Should show home page content")
     void shouldShowHomePageContent() {
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
@@ -36,6 +38,7 @@ public class HomeTests extends BaseTest {
     }
 
     @Test
+    @DisplayName("Should update cart total amount after adding one product")
     void shouldUpdateCartTotalAfterAddingOneProduct() {
         HomePage homePage = new HomePage(driver);
 

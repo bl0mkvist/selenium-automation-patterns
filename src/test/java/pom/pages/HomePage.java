@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
 
     public HomePage goToHomePage() {
         driver.get(baseURL);
-        storeNotice.dismissStoreNotice();
+        storeNotice.dismissStoreNoticeIfPresent();
         return this;
     }
 
@@ -61,6 +61,7 @@ public class HomePage extends BasePage {
 
     public CartPage goToCartPage() {
         clickElement(cartButton);
+       // storeNotice.dismissStoreNoticeIfPresent();
         return new CartPage(driver);
     }
 

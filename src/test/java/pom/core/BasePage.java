@@ -31,7 +31,7 @@ public abstract class BasePage {
 
     protected void goToProductPage(String productSlug) {
         driver.get(baseURL + "/products" + productSlug);
-        storeNotice.dismissStoreNotice();
+        storeNotice.dismissStoreNoticeIfPresent();
     }
 
     protected void clickElement(By locator) {

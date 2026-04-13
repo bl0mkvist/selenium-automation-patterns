@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pom.helpers.WaitUtils;
 
+import java.util.List;
+
 public class StoreNotice {
     protected final WebDriver driver;
-    private final By storeNoticeDismissButton = By.cssSelector(".woocommerce-store-notice__dismiss-link");
+    private final By storeNoticeDismissButton = By.cssSelector("p[aria-label='Napis w sklepie'] [role='button']");
     private final By storeNoticePanel = By.cssSelector(".woocommerce-store-notice");
     private final WaitUtils waitUtils;
 
@@ -16,13 +18,18 @@ public class StoreNotice {
         this.waitUtils = new WaitUtils(driver, waitValueInSeconds);
     }
 
-    public void dismissStoreNotice() {
-        if (!driver.findElements(storeNoticeDismissButton).isEmpty()) {
-            WebElement element = waitUtils.waitTobeClickable(storeNoticeDismissButton);
-            element.click();
-            waitUtils.waitToBeInvisible(storeNoticePanel);
+    public void dismissStoreNoticeIfPresent() {
+        List<WebElement> elements = driver.findElements(storeNoticeDismissButton);
 
+        if (elements.isEmpty()) {
+            return;
+        }
+
+        WebElement dismissButton = elements.get(0);
+
+        if (dismissButton.isDisplayed()) {
+            dismissButton.click();
+            waitUtils.waitToBeInvisible(storeNoticePanel);
         }
     }
-
 }
