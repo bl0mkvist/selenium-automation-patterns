@@ -81,4 +81,8 @@ public abstract class BasePage {
     protected WebElement waitToBeClickable(WebElement locator) {
         return waitUtils.waitToBeClickable(locator);
     }
+
+    protected WebElement waitToBeClickable(By locator) {
+       return waitUtils.waitTobeClickable(locator);
+    }
 }

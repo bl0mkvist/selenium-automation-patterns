@@ -11,11 +11,15 @@ import java.util.List;
 
 public class CategoryPage extends BasePage {
     private final String wspinaczkaSlug = "/wspinaczka/";
+    private final String windsurfingSlug = "/windsurfing/";
 
     private final By cartButton = By.cssSelector(".cart-contents");
     private final By regularPrices = By.cssSelector(".price > .amount bdi");
     private final By promoPrices = By.cssSelector(".price ins bdi");
     private final By listOfAddToCartButtons = By.cssSelector("#main .add_to_cart_button");
+    private final By productsContainer = By.id("main");
+    private final By sortingDropdowns = By.cssSelector(".woocommerce-ordering");
+    private final By sortByPriceDescendingButton = By.cssSelector("option[value='price-desc']");
 
     By blockUIOverlay = By.cssSelector(".loading");
     By categoryProducts = By.cssSelector("#main");
@@ -30,6 +34,13 @@ public class CategoryPage extends BasePage {
         storeNotice.dismissStoreNotice();
         return this;
     }
+
+    public CategoryPage goToWindsurfingCategory() {
+        driver.get(baseURL + "/product-category" + windsurfingSlug);
+        storeNotice.dismissStoreNotice();
+        return this;
+    }
+
 
     public List<BigDecimal> readAllCategoryPrices() {
         List<BigDecimal> pricesList = new ArrayList<>();
@@ -65,5 +76,17 @@ public class CategoryPage extends BasePage {
     public CartPage goToCart() {
         clickElement(cartButton);
         return new CartPage(driver);
+    }
+
+    public WebElement getFirstSortingDropdown() {
+        return driver.findElements(sortingDropdowns).get(0);
+    }
+
+    public CategoryPage sortProductsByPriceDescending() {
+        waitToBeClickable(sortingDropdowns);
+        getFirstSortingDropdown().click();
+        clickElement(sortByPriceDescendingButton);
+        waitUtils.waitForURLContains("orderby=price-desc");
+        return this;
     }
 }
