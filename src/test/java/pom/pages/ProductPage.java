@@ -33,7 +33,7 @@ public class ProductPage extends BasePage {
 
     public ProductPage addProductToCart() {
         clickElement(addToCart);
-        waitUtils.waitForVisibility(addToCartConfirmationWidget);
+        waitForVisibility(addToCartConfirmationWidget);
         return this;
     }
 

@@ -3,9 +3,7 @@ package pom.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import pom.core.BaseTest;
-
 import pom.pages.ProductPage;
 import pom.pages.WishlistPage;
 

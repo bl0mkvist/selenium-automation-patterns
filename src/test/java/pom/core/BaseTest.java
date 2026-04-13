@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import pom.helpers.BrowserFactory;
 import pom.helpers.ConfigurationReader;
 
-import java.math.BigDecimal;
-
 public class BaseTest {
     protected WebDriver driver;
     protected static ConfigurationReader configuration;

@@ -29,8 +29,8 @@ public class WaitUtils {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public void waitForToDisappear(By cssSelector) {
-        wait.until(ExpectedConditions.numberOfElementsToBe(cssSelector, 0));
+    public void waitToDisappear(By locator) {
+        wait.until(ExpectedConditions.numberOfElementsToBe(locator, 0));
     }
 
     public void waitForWindowsToBe(int numberOfWindows){
@@ -39,11 +39,9 @@ public class WaitUtils {
 
     public void waitForURLContains(String url) {
         wait.until(ExpectedConditions.urlContains(url));
-
     }
 
     public void waitToBeInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-
     }
 }

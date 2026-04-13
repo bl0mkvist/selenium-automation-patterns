@@ -1,10 +1,6 @@
 package pom.helpers;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.Set;
 
 public class WindowHelper {
