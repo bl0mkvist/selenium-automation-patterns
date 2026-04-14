@@ -39,11 +39,3 @@ public class StoreNotice {
         }
     }
 }
-
-
-/*
-Nie opierał tej metody na samym findElements() bez waita.
-Dodał krótki wait tylko dla notice, rzędu 2–3 sekund.
-Po kliknięciu koniecznie czekał na zniknięcie panelu.
-Opcjonalnie dodał fallback dla click intercept na tym jednym elemencie.
- */
