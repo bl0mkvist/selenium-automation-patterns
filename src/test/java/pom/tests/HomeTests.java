@@ -21,7 +21,7 @@ public class HomeTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
 
-        String expectedPageTitle = "FakeStore – Sklep do nauki testowania" + "testmasfailowac";
+        String expectedPageTitle = "FakeStore – Sklep do nauki testowania";
         String expectedPageURL = configuration.getBaseURL().replaceAll("/+$", "");
         String actualURL = homePage.readCurrentUrl().replaceAll("/+$", "");
 
