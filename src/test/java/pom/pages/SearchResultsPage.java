@@ -11,7 +11,7 @@ import java.util.List;
 public class SearchResultsPage extends BasePage {
 
 
-    By listOfAllProductTitles = By.cssSelector(".columns-3 h2");
+    By listOfAllProductTitles = By.cssSelector(".product h2");
     By productsContainer = By.cssSelector(".products");
 
 

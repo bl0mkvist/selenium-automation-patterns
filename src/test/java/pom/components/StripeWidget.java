@@ -22,7 +22,7 @@ public class StripeWidget {
         this.driver = driver;
         this.waitUtils = new WaitUtils(driver, waitInSeconds);
     }
-    // Handles Stripe dev tools overlay that blocks UI interactions in tests
+    // Handles Stripe dev tools overlay (iframe + animations) that blocks UI interactions in tests
     public void handleStripeWidgetOverlay() {
         WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe);
         try {

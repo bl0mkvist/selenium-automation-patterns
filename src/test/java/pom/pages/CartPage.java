@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 public class CartPage extends BasePage  {
 
     By totalCartValue = By.cssSelector("td[data-title='Suma'] strong");
-    By quantityInputField = By.cssSelector(".quantity .input-text");
+    By quantityInputField = By.cssSelector("[name*='[qty]']");
     By updateCartButton = By.cssSelector(".actions button[name='update_cart']");
-    By blockUWrapper = By.cssSelector(".blockUI");
+    By blockingOverlay = By.cssSelector(".blockUI");
     By couponInputField = By.cssSelector("#coupon_code");
-    By couponApplyButton = By.cssSelector(".coupon button");
+    By couponApplyButton = By.cssSelector("[name='apply_coupon']");
     By removeProductButton = By.cssSelector(".product-remove a[role='button']");
     By productInCartList = By.cssSelector(".cart_item");
     By emptyCartNotification = By.cssSelector(".woocommerce-notices-wrapper .cart-empty");
@@ -47,20 +47,20 @@ public class CartPage extends BasePage  {
     @Step("Update cart")
     public CartPage updateCart() {
         clickElement(updateCartButton);
-        waitForDisappear(blockUWrapper);
+        waitForDisappear(blockingOverlay);
         return this;
     }
     @Step("Apply coupon {couponCode}")
     public CartPage applyCoupon(String couponCode) {
         sendKeys(couponInputField, couponCode);
         clickElement(couponApplyButton);
-        waitForDisappear(blockUWrapper);
+        waitForDisappear(blockingOverlay);
         return this;
     }
     @Step("Remove product from cart")
     public CartPage removeProductFromCart() {
         clickElement(removeProductButton);
-        waitForDisappear(blockUWrapper);
+        waitForDisappear(blockingOverlay);
         return this;
     }
 

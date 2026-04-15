@@ -10,12 +10,12 @@ import java.math.BigDecimal;
 
 public class HomePage extends BasePage {
     private final By productCategories = By.cssSelector(".storefront-product-section");
-    private final By windsurfingProductPageButton = By.cssSelector(".storefront-recent-products .post-4116");
-    private final By addWindsurfingButton = By.cssSelector(".storefront-recent-products [data-product_id='4116']"); // poprawic
-    private final By windsurfingActualPrice = By.cssSelector(".storefront-recent-products .post-4116 .amount");
+    private final By windsurfingLanzaroteProductContainer = By.cssSelector(".storefront-recent-products [href*='windsurfing-w-lanzarote']");
+    private final By addWindsurfingButton = By.cssSelector(".storefront-recent-products [data-product_id='4116']");
+    private final By windsurfingPrice = By.cssSelector(".storefront-recent-products .post-4116 .amount");
     private final By addWindsurfingLoadingIcon = By.cssSelector(".storefront-recent-products .loading[data-product_id='4116']");
-    private final By totalAmountTextField = By.cssSelector(".cart-contents .amount");
-    private final By cartButton = By.cssSelector(".site-header-cart");
+    private final By cartTotalAmount = By.cssSelector(".cart-contents .amount");
+    private final By cartHeaderButton = By.cssSelector("#site-header-cart");
     private final By searchTextField = By.cssSelector("input.search-field");
 
     public HomePage(WebDriver driver) {
@@ -37,11 +37,11 @@ public class HomePage extends BasePage {
     }
 
     public BigDecimal readWindsurfingProductPrice() {
-        return convertStringToBigDecimal(windsurfingActualPrice);
+        return convertStringToBigDecimal(windsurfingPrice);
     }
 
     public BigDecimal readTotalCartAmount() {
-        return convertStringToBigDecimal(totalAmountTextField);
+        return convertStringToBigDecimal(cartTotalAmount);
     }
 
     public String readCurrentUrl() {
@@ -59,13 +59,13 @@ public class HomePage extends BasePage {
 
     @Step("Go to Windsurfing product page")
     public ProductPage goToWindsurfingProductPage() {
-        clickElement(windsurfingProductPageButton);
+        clickElement(windsurfingLanzaroteProductContainer);
         return new ProductPage(driver);
     }
 
     @Step("Go to cart page")
     public CartPage goToCartPage() {
-        clickElement(cartButton);
+        clickElement(cartHeaderButton);
         return new CartPage(driver);
     }
 

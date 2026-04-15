@@ -11,9 +11,9 @@ import pom.core.BasePage;
 import java.math.BigDecimal;
 
 public class ProductPage extends BasePage {
-    private final By addToCart = By.cssSelector(".cart>button");
+    private final By addToCartButton = By.cssSelector("[name='add-to-cart']");
     private final By addToCartConfirmationWidget = By.cssSelector(".woocommerce-message[role='alert']");
-    private final By productPrice = By.cssSelector(".summary >.price>.amount");
+    private final By productPrice = By.cssSelector(".summary .price .amount");
     private final By cartPriceTotal = By.cssSelector("#site-header-cart .cart-contents .amount");
     private final By cartHeader = By.cssSelector("#site-header-cart");
     private final By cartTotalPriceOnDropdown = By.cssSelector("#site-header-cart .total .amount");
@@ -21,7 +21,7 @@ public class ProductPage extends BasePage {
     private final By blockUIOverlay = By.cssSelector(".blockOverlay");
     private final By productMaxQuantity = By.cssSelector(".summary .stock");
     private final By addToWishlistButton = By.cssSelector(".add_to_wishlist");
-    private final By wishListButton = By.cssSelector("#menu-item-248");
+    private final By wishListButton = By.cssSelector("#menu-menu [href*='/wishlist/']");
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -35,13 +35,13 @@ public class ProductPage extends BasePage {
 
     @Step("Add product to cart")
     public ProductPage addProductToCart() {
-        clickElement(addToCart);
+        clickElement(addToCartButton);
         waitForVisibility(addToCartConfirmationWidget);
         return this;
     }
 
     public ProductPage clickAddToCart() {
-        clickElement(addToCart);
+        clickElement(addToCartButton);
         return this;
     }
 

@@ -14,16 +14,14 @@ public class CategoryPage extends BasePage {
     private final String wspinaczkaSlug = "/wspinaczka/";
     private final String windsurfingSlug = "/windsurfing/";
 
-    private final By cartButton = By.cssSelector(".cart-contents");
-    private final By regularPrices = By.cssSelector(".price > .amount bdi");
+    private final By cartButton = By.cssSelector("a[title='Zobacz zawartość koszyka']");
+    private final By regularPrices = By.cssSelector(".price > .amount > bdi");
     private final By promoPrices = By.cssSelector(".price ins bdi");
     private final By listOfAddToCartButtons = By.cssSelector("#main .add_to_cart_button");
-    private final By productsContainer = By.id("main");
     private final By sortingDropdowns = By.cssSelector(".woocommerce-ordering");
     private final By sortByPriceDescendingButton = By.cssSelector("option[value='price-desc']");
-
-    By blockUIOverlay = By.cssSelector(".loading");
-    By categoryProducts = By.cssSelector("#main");
+    private final By blockUIOverlay = By.cssSelector(".loading");
+    private final By categoryProducts = By.cssSelector("#main");
 
     public CategoryPage(WebDriver driver) {
         super(driver);
